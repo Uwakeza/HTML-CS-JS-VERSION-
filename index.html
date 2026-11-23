@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rental Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HOME / LANDING PAGE -->
+  <div id="homeScreen">
+    <header class="home-header">
+      <h1>Rental Management System</h1>
+      <button class="btn" id="goToLoginTop" type="button">Log in</button>
+    </header>
+
+    <section class="hero">
+      <h2>Manage your rental properties with ease</h2>
+      <p>Track properties, tenants and payments in one simple dashboard. Built for small landlords and property managers.</p>
+      <button class="btn" id="goToLoginHero" type="button">Get Started</button>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <img class="icon" src="images/icon-properties.jpg" alt="Properties">
+        <h3>Properties</h3>
+        <p>Keep every unit, its address and rent in one place.</p>
+      </div>
+      <div class="feature">
+        <img class="icon" src="images/icon-tenants.jpg" alt="Tenants">
+        <h3>Tenants</h3>
+        <p>See who lives where, and when each lease ends.</p>
+      </div>
+      <div class="feature">
+        <img class="icon" src="images/icon-payments.jpg" alt="Payments">
+        <h3>Payments</h3>
+        <p>Track who has paid and who still owes rent.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="login-wrap hidden">
+    <div class="login-box">
+      <h1>Rental Management System</h1>
+      <p class="hint">Log in to continue. Demo account: <strong>admin</strong> / <strong>1234</strong></p>
+      <p class="login-error" id="loginError">Incorrect username or password.</p>
+      <form id="loginForm">
+        <label>Username <input type="text" id="username" required></label>
+        <label>Password <input type="password" id="password" required></label>
+        <button class="btn" type="submit">Log in</button>
+      </form>
+      <p style="text-align:center; margin-top:14px;">
+        <a href="#" id="backToHome" style="color:var(--brand); font-size:.9rem;">&larr; Back to home</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- APP (hidden until logged in) -->
+  <div id="app" class="hidden">
+    <header>
+      <h1>Rental Management System</h1>
+      <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#properties">Properties</a>
+        <a href="#tenants">Tenants</a>
+        <a href="#payments">Payments</a>
+        <a href="#bookings">Bookings</a>
+        <button id="logoutBtn" type="button">Log out</button>
+      </nav>
+    </header>
+
+    <main>
+    <section id="dashboard">
+      <h2>Dashboard</h2>
+      <div class="cards">
+        <div class="card"><strong>4</strong><span>Properties</span></div>
+        <div class="card"><strong>3</strong><span>Occupied</span></div>
+        <div class="card"><strong>$2,450</strong><span>Monthly rent</span></div>
+        <div class="card"><strong>1</strong><span>Payments due</span></div>
+      </div>
+    </section>
+
+    <section id="properties">
+      <h2>Properties</h2>
+      <div class="property-grid" id="propertyGrid">
+        <div class="property-card">
+          <img class="property-photo" src="https://picsum.photos/id/1080/400/250" alt="Sunrise Apt 1A">
+          <div class="property-body">
+            <h3>Sunrise Apt 1A</h3>
+            <p class="addr">12 Main St</p>
+            <div class="property-foot">
+              <span class="property-rent">$700/mo</span>
+              <span class="badge occupied">Occupied</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img class="property-photo" src="https://picsum.photos/id/1031/400/250" alt="Sunrise Apt 2B">
+          <div class="property-body">
+            <h3>Sunrise Apt 2B</h3>
+            <p class="addr">12 Main St</p>
+            <div class="property-foot">
+              <span class="property-rent">$750/mo</span>
+              <span class="badge occupied">Occupied</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img class="property-photo" src="https://picsum.photos/id/164/400/250" alt="Lakeview House">
+          <div class="property-body">
+            <h3>Lakeview House</h3>
+            <p class="addr">4 Lake Rd</p>
+            <div class="property-foot">
+              <span class="property-rent">$1,000/mo</span>
+              <span class="badge occupied">Occupied</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card" data-status="vacant">
+          <img class="property-photo" src="https://picsum.photos/id/106/400/250" alt="Garden Studio">
+          <div class="property-body">
+            <h3>Garden Studio</h3>
+            <p class="addr">9 Park Ave</p>
+            <div class="property-foot">
+              <span class="property-rent">$450/mo</span>
+              <span class="badge">Vacant</span>
+            </div>
+            <button class="btn small book-btn" type="button">Book this property</button>
+            <form class="booking-form hidden">
+              <label>Your name <input type="text" class="bookName" required></label>
+              <label>Phone <input type="text" class="bookPhone" required></label>
+              <button class="btn small" type="submit">Confirm booking</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <h2 style="margin-top:20px">Add property</h2>
+      <form id="addPropertyForm">
+        <label>Name <input type="text" id="propName" required></label>
+        <label>Address <input type="text" id="propAddress" required></label>
+        <label>Monthly rent ($) <input type="number" id="propRent" min="0" required></label>
+        <button class="btn" type="submit">Add property</button>
+      </form>
+    </section>
+
+    <section id="tenants">
+      <h2>Tenants</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Phone</th><th>Property</th><th>Lease ends</th></tr></thead>
+          <tbody>
+            <tr><td>Amina Uwase</td><td>0788 000 111</td><td>Sunrise Apt 1A</td><td>2027-03-31</td></tr>
+            <tr><td>Jean Habimana</td><td>0722 000 222</td><td>Sunrise Apt 2B</td><td>2026-12-31</td></tr>
+            <tr><td>Grace Mukamana</td><td>0733 000 333</td><td>Lakeview House</td><td>2027-06-30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="payments">
+      <h2>Payments</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tenant</th><th>Month</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Amina Uwase</td><td>September</td><td>$700</td><td><span class="badge paid">Paid</span></td></tr>
+            <tr><td>Jean Habimana</td><td>September</td><td>$750</td><td><span class="badge due">Due</span></td></tr>
+            <tr><td>Grace Mukamana</td><td>September</td><td>$1,000</td><td><span class="badge paid">Paid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="bookings">
+      <h2>Bookings</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Client</th><th>Phone</th><th>Property</th><th>Requested</th></tr></thead>
+          <tbody id="bookingsBody">
+            <tr id="noBookingsRow"><td colspan="4" style="color:var(--muted)">No bookings yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    </main>
+
+    <footer>Rental Management System &copy; 2026</footer>
+  </div>
+
+  <script>
+    const homeScreen = document.getElementById('homeScreen');
+    const loginScreen = document.getElementById('loginScreen');
+    const app = document.getElementById('app');
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Demo credentials only — not real security.
+    const VALID_USERNAME = 'admin';
+    const VALID_PASSWORD = '1234';
+
+    function showHome() {
+      app.classList.add('hidden');
+      loginScreen.classList.add('hidden');
+      homeScreen.classList.remove('hidden');
+    }
+    function showLogin() {
+      homeScreen.classList.add('hidden');
+      app.classList.add('hidden');
+      loginScreen.classList.remove('hidden');
+      loginForm.reset();
+      loginError.style.display = 'none';
+    }
+    function showApp() {
+      homeScreen.classList.add('hidden');
+      loginScreen.classList.add('hidden');
+      app.classList.remove('hidden');
+    }
+
+    // Stay logged in after a page refresh, using sessionStorage
+    // (cleared automatically when the browser tab is closed).
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+      showApp();
+    } else {
+      showHome();
+    }
+
+    document.getElementById('goToLoginTop').addEventListener('click', showLogin);
+    document.getElementById('goToLoginHero').addEventListener('click', showLogin);
+    document.getElementById('backToHome').addEventListener('click', function (e) {
+      e.preventDefault();
+      showHome();
+    });
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+        sessionStorage.setItem('loggedIn', 'true');
+        showApp();
+      } else {
+        loginError.style.display = 'block';
+      }
+    });
+
+    logoutBtn.addEventListener('click', function () {
+      sessionStorage.removeItem('loggedIn');
+      showHome();
+    });
+
+    // ADD PROPERTY
+    const addPropertyForm = document.getElementById('addPropertyForm');
+    const propertyGrid = document.getElementById('propertyGrid');
+
+    addPropertyForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('propName').value.trim();
+      const address = document.getElementById('propAddress').value.trim();
+      const rent = document.getElementById('propRent').value;
+
+      // Each new property gets a random placeholder photo. Replace the
+      // src below with your own image path (e.g. "images/property5.jpg")
+      // if you'd rather use a specific photo you already saved.
+      const randomImage = 'https://picsum.photos/seed/' + Date.now() + '/400/250';
+
+      const card = document.createElement('div');
+      card.className = 'property-card';
+      card.dataset.status = 'vacant';
+      card.innerHTML =
+        '<img class="property-photo" src="' + randomImage + '" alt="' + name + '">' +
+        '<div class="property-body">' +
+          '<h3>' + name + '</h3>' +
+          '<p class="addr">' + address + '</p>' +
+          '<div class="property-foot">' +
+            '<span class="property-rent">$' + Number(rent).toLocaleString() + '/mo</span>' +
+            '<span class="badge">Vacant</span>' +
+          '</div>' +
+          '<button class="btn small book-btn" type="button">Book this property</button>' +
+          '<form class="booking-form hidden">' +
+            '<label>Your name <input type="text" class="bookName" required></label>' +
+            '<label>Phone <input type="text" class="bookPhone" required></label>' +
+            '<button class="btn small" type="submit">Confirm booking</button>' +
+          '</form>' +
+        '</div>';
+
+      propertyGrid.appendChild(card);
+      addPropertyForm.reset();
+    });
+
+    // BOOKINGS — reveal the form when "Book this property" is clicked
+    propertyGrid.addEventListener('click', function (e) {
+      if (e.target.classList.contains('book-btn')) {
+        const card = e.target.closest('.property-card');
+        e.target.classList.add('hidden');
+        card.querySelector('.booking-form').classList.remove('hidden');
+      }
+    });
+
+    // BOOKINGS — handle the booking form submit (works for every card,
+    // including ones added later, because the listener is on the grid)
+    const bookingsBody = document.getElementById('bookingsBody');
+    const noBookingsRow = document.getElementById('noBookingsRow');
+
+    propertyGrid.addEventListener('submit', function (e) {
+      if (!e.target.classList.contains('booking-form')) return;
+      e.preventDefault();
+
+      const card = e.target.closest('.property-card');
+      const propertyName = card.querySelector('h3').textContent;
+      const clientName = e.target.querySelector('.bookName').value.trim();
+      const clientPhone = e.target.querySelector('.bookPhone').value.trim();
+      const today = new Date().toLocaleDateString();
+
+      noBookingsRow.remove();
+      const row = document.createElement('tr');
+      row.innerHTML =
+        '<td>' + clientName + '</td>' +
+        '<td>' + clientPhone + '</td>' +
+        '<td>' + propertyName + '</td>' +
+        '<td>' + today + '</td>';
+      bookingsBody.appendChild(row);
+
+      // Mark the property as booked: hide the form, swap the badge.
+      card.dataset.status = 'booked';
+      card.querySelector('.property-foot .badge').textContent = 'Booked';
+      card.querySelector('.property-foot .badge').className = 'badge booked';
+      e.target.remove();
+      const note = document.createElement('p');
+      note.className = 'booked-note';
+      note.textContent = 'Booked by ' + clientName;
+      card.querySelector('.property-body').appendChild(note);
+    });
+  </script>
+</body>
+</html>

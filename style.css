@@ -1,0 +1,176 @@
+:root {
+  --ink: #1f2a37;
+  --muted: #64748b;
+  --bg: #f3f5f2;
+  --panel: #ffffff;
+  --line: #dde3dc;
+  --brand: #1f5f5b;
+  --paid: #2f7d4f;
+  --due: #b45309;
+  --vacant: #475569;
+  --booked: #7c3aed;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+header {
+  background: var(--brand);
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+header h1 { margin: 0; font-size: 1.3rem; }
+nav { display: flex; gap: 6px; flex-wrap: wrap; }
+nav a, nav button {
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .4);
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+}
+nav a:hover, nav button:hover, nav button.active { background: rgba(255, 255, 255, .2); }
+main { max-width: 1000px; margin: 0 auto; padding: 24px 16px; }
+section { margin-bottom: 32px; }
+h2 { font-size: 1.15rem; margin: 0 0 12px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+.card strong { display: block; font-size: 1.8rem; }
+.card span { color: var(--muted); }
+.table-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; min-width: 560px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+th { background: #eef2ee; font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+.badge { padding: 2px 10px; border-radius: 999px; font-size: .85rem; color: #fff; background: var(--vacant); }
+.badge.paid, .badge.occupied { background: var(--paid); }
+.badge.due { background: var(--due); }
+.badge.booked { background: var(--booked); }
+form { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end; }
+label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
+input, select { padding: 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.btn { background: var(--brand); color: #fff; border: 0; padding: 9px 16px; border-radius: 6px; font: inherit; cursor: pointer; }
+.btn.small { padding: 4px 10px; font-size: .85rem; }
+:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+footer { text-align: center; color: var(--muted); padding: 16px; }
+
+/* Login screen */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(20,40,38,.55), rgba(20,40,38,.65)),
+              url("images/login-bg.jpg") center/cover no-repeat;
+  padding: 20px;
+}
+.login-box {
+  background: rgba(255, 255, 255, .97);
+  border-radius: 10px;
+  padding: 32px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+.login-box h1 { font-size: 1.2rem; margin: 0 0 4px; }
+.login-box p.hint { color: var(--muted); font-size: .85rem; margin: 0 0 20px; }
+.login-box label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); margin-bottom: 14px; }
+.login-box input { padding: 9px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.login-box .btn { width: 100%; padding: 10px; }
+.login-error { color: #b91c1c; font-size: .85rem; margin: 0 0 12px; display: none; }
+.hidden { display: none !important; }
+
+/* Property photo cards */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.property-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.property-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
+}
+.property-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  background: #e2e8e0;
+}
+.property-body { padding: 14px 16px; }
+.property-body h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.property-body .addr { color: var(--muted); font-size: .88rem; margin: 0 0 10px; }
+.property-foot { display: flex; align-items: center; justify-content: space-between; }
+.property-rent { font-weight: 700; }
+.book-btn { margin-top: 12px; width: 100%; }
+.booking-form {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.booking-form input { padding: 7px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.booking-form .btn { padding: 7px; }
+.booked-note { color: var(--booked); font-size: .85rem; margin-top: 10px; font-weight: 600; }
+
+/* Home / landing page */
+.home-header {
+  background: var(--brand);
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-header h1 { margin: 0; font-size: 1.3rem; }
+.hero {
+  background: linear-gradient(rgba(20,40,38,.65), rgba(20,40,38,.75)),
+              url("images/cover.jpg") center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 110px 20px;
+}
+.hero h2 { font-size: 2rem; margin: 0 0 12px; }
+.hero p { max-width: 520px; margin: 0 auto 26px; color: #e6efe9; }
+.hero .btn { padding: 12px 28px; font-size: 1rem; }
+.features {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.feature { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 24px 20px; text-align: center; }
+.feature .icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px;
+  display: block;
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--line);
+}
+.feature h3 { margin: 0 0 6px; font-size: 1rem; }
+.feature p { margin: 0; color: var(--muted); font-size: .88rem; }
